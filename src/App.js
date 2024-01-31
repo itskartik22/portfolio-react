@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { MainComponent } from "./components";
+import { motion } from "framer-motion";
+import { useRef } from "react";
+import useFollowPointer from "./components/use-follow-pointer";
 
 function App() {
+  const ref = useRef(null);
+  const { x, y } = useFollowPointer(ref);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App max-w-screen">
+      {/* <motion.div
+        ref={ref}
+        className="w-10 h-10 rounded-full bg-white/50"
+        animate={{ x, y }}
+        transition={{
+          // type: "spring",
+          damping: 5,
+          // stiffness: 50,
+          // restDelta: 0.001
+        }}
+      /> */}
+      <MainComponent />
     </div>
   );
 }
