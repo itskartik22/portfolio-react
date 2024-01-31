@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react";
 
 const MainComponent = () => {
   const [activeHoverEffect, setActiveHoverEffect] = useState("");
-  const [activeSection, setActiveSection] = useState("about");
+  const [activeSection, setActiveSection] = useState("");
   const sectionRefs = {
     aboutRef: useRef(null),
     skillRef: useRef(null),
@@ -18,6 +18,7 @@ const MainComponent = () => {
     educationRef: useRef(null),
   };
   const mainScrollRef = useRef(null);
+  const mobileScrollRef = useRef(null);
 
   const handleScroll = () => {
     const scrollPosition = mainScrollRef.current.scrollTop;
@@ -37,10 +38,19 @@ const MainComponent = () => {
     });
   };
 
-  const handleClickScroll = (sectionId) => {
+  const handleWindowClickScroll = (sectionId) => {
     const sectionRef = sectionRefs[sectionId];
     const sectionTop = sectionRef.current.offsetTop;
     mainScrollRef.current.scrollTop = sectionTop - 80;
+  };
+
+  const handleMobileClickScroll = (sectionId) => {
+    const sectionRef = sectionRefs[sectionId];
+    const sectionTop = sectionRef.current.offsetTop;
+    window.scrollTo({
+      top: sectionTop - 50,
+    });
+    setActiveHoverEffect("");
   };
 
   useEffect(() => {
@@ -63,37 +73,31 @@ const MainComponent = () => {
       ref={mainScrollRef}
       className="max-w-screen lg:max-h-screen md:overflow-x-hidden bg-gradient-to-tr from-black to-slate-900 text-white scroll-smooth"
     >
-      {/* <div className="z-1 absolute -top-48 -left-28 bg-white/90 rounded-full" style={{
-        height: "45rem",
-        width: "45rem"
-      }}></div> */}
-
-      <div className="flex lg:flex-row flex-col gap-5">
-        <div className="lg:w-1/2 w-full lg:h-screen h-fit lg:sticky top-0 flex flex-col justify-between lg:gap-0 gap-12 xl:px-24 lg:px-18 md:px-16 sm:px-8 px-3 xl:py-24 lg:py-20 md:py-12 sm:py-12 py-32 pb-10">
+      <div ref={mobileScrollRef} className="flex lg:flex-row flex-col gap-5">
+        <div className="lg:w-1/2 w-full lg:h-screen h-fit  lg:sticky top-0 flex flex-col justify-between lg:gap-0 gap-16 xl:px-24 lg:px-18 md:px-16 sm:px-8 px-3 xl:py-24 lg:py-20 md:py-12 sm:py-12 py-32 pb-10">
           <div className="flex flex-col gap-3">
             <div className="flex flex-col gap-2">
-                <h2 className="text-xl font-semibold">Hello there! I am</h2>
-              <h1 className="text-5xl font-bold drop-shadow-md shadow-white">
+              <h2 className="text-xl font-semibold">Hello there! I am</h2>
+              <h1 className="md:text-6xl text-5xl font-bold drop-shadow-md shadow-white">
                 Kartik Kumar
               </h1>
-                <h2 className="text-2xl font-semibold">
-                  a MERN Stack Developer
-                </h2>
+              <h2 className="text-2xl font-semibold">a MERN Stack Developer</h2>
               {/* <p className="text-lg font-medium">
                 Hi, I am Kartik Thakur, a undergraduate Engineering IT student.
               </p> */}
             </div>
             <nav className="">
-              <ul className="w-fit flex flex-col text-lg font-medium gap-1">
+              <ul className="lg:flex hidden w-fit flex-col text-lg font-medium gap-1">
                 <li
+                  href="#about"
                   className={`${
                     activeSection === "about" || activeHoverEffect === "about"
                       ? "text-white"
                       : "text-slate-500"
-                  } flex items-center gap-2 cursor-pointer transition-all`}
+                  } flex items-center gap-2 cursor-pointer select-none transition-all`}
                   onMouseEnter={() => setActiveHoverEffect("about")}
                   onMouseLeave={() => setActiveHoverEffect("")}
-                  onClick={() => handleClickScroll("aboutRef")}
+                  onClick={() => handleWindowClickScroll("aboutRef")}
                 >
                   <div
                     className={`
@@ -110,6 +114,7 @@ const MainComponent = () => {
                   About
                 </li>
                 <li
+                  href="#skills"
                   className={`${
                     activeSection === "skills" || activeHoverEffect === "skills"
                       ? "text-white"
@@ -117,7 +122,7 @@ const MainComponent = () => {
                   } flex items-center gap-2 cursor-pointer transition-all`}
                   onMouseEnter={() => setActiveHoverEffect("skills")}
                   onMouseLeave={() => setActiveHoverEffect("")}
-                  onClick={() => handleClickScroll("skillRef")}
+                  onClick={() => handleWindowClickScroll("skillRef")}
                 >
                   <div
                     className={`
@@ -135,6 +140,7 @@ const MainComponent = () => {
                   Skills
                 </li>
                 <li
+                  href="#projects"
                   className={`${
                     activeSection === "projects" ||
                     activeHoverEffect === "projects"
@@ -143,7 +149,7 @@ const MainComponent = () => {
                   } flex items-center gap-2 cursor-pointer transition-all`}
                   onMouseEnter={() => setActiveHoverEffect("projects")}
                   onMouseLeave={() => setActiveHoverEffect("")}
-                  onClick={() => handleClickScroll("projectRef")}
+                  onClick={() => handleWindowClickScroll("projectRef")}
                 >
                   {" "}
                   <div
@@ -162,6 +168,7 @@ const MainComponent = () => {
                   Projects
                 </li>
                 <li
+                  href="#education"
                   className={`${
                     activeSection === "education" ||
                     activeHoverEffect === "education"
@@ -170,7 +177,88 @@ const MainComponent = () => {
                   } flex items-center gap-2 cursor-pointer transition-all`}
                   onMouseEnter={() => setActiveHoverEffect("education")}
                   onMouseLeave={() => setActiveHoverEffect("")}
-                  onClick={() => handleClickScroll("educationRef")}
+                  onClick={() => handleWindowClickScroll("educationRef")}
+                >
+                  {" "}
+                  <div
+                    className={`
+                    ${
+                      activeSection === "education" ||
+                      activeHoverEffect === "education"
+                        ? "w-16 bg-white"
+                        : "w-8 bg-slate-500"
+                    }
+                     transition-all`}
+                    style={{
+                      height: "0.15rem",
+                    }}
+                  ></div>
+                  Education
+                </li>
+              </ul>
+              {/* Mobile Navbar Functioning */}
+              <ul className="lg:hidden w-fit flex flex-col text-lg font-medium gap-1">
+                <li
+                  className={`text-slate-200 flex items-center gap-2 cursor-pointer transition-all`}
+                  onClick={() => handleMobileClickScroll("aboutRef")}
+                >
+                  <div
+                    className={`
+                    ${
+                      activeSection === "about" || activeHoverEffect === "about"
+                        ? "w-16 bg-white"
+                        : "w-8 bg-slate-500"
+                    }
+                     transition-all`}
+                    style={{
+                      height: "0.15rem",
+                    }}
+                  ></div>
+                  About
+                </li>
+                <li
+                  href="#skills"
+                  className={`text-slate-200 flex items-center gap-2 cursor-pointer transition-all`}
+                  onClick={() => handleMobileClickScroll("skillRef")}
+                >
+                  <div
+                    className={`
+                    ${
+                      activeSection === "skills" ||
+                      activeHoverEffect === "skills"
+                        ? "w-16 bg-white"
+                        : "w-8 bg-slate-500"
+                    }
+                     transition-all`}
+                    style={{
+                      height: "0.15rem",
+                    }}
+                  ></div>
+                  Skills
+                </li>
+                <li
+                  className={`text-slate-200 flex items-center gap-2 cursor-pointer transition-all`}
+                  onClick={() => handleMobileClickScroll("projectRef")}
+                >
+                  {" "}
+                  <div
+                    className={`
+                    ${
+                      activeSection === "projects" ||
+                      activeHoverEffect === "projects"
+                        ? "w-16 bg-white"
+                        : "w-8 bg-slate-500"
+                    }
+                     transition-all`}
+                    style={{
+                      height: "0.15rem",
+                    }}
+                  ></div>
+                  Projects
+                </li>
+                <li
+                  className={`text-slate-200 flex items-center gap-2 cursor-pointer transition-all`}
+                  onClick={() => handleMobileClickScroll("educationRef")}
                 >
                   {" "}
                   <div
@@ -225,7 +313,9 @@ const MainComponent = () => {
           <ProjectSection reference={sectionRefs.projectRef} />
           <EducationSection reference={sectionRefs.educationRef} />
         </div>
-        <p className="lg:hidden block text-center bg-white/10 p-4">@copyright. Kartik Kumar</p>
+        <p className="lg:hidden block text-center bg-white/10 p-4">
+          @copyright. Kartik Kumar
+        </p>
       </div>
     </div>
   );
