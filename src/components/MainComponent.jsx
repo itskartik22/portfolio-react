@@ -7,7 +7,6 @@ import ProjectSection from "./ProjectSection";
 import SkillSection from "./SkillSection";
 import EducationSection from "./EducationSection";
 import { useEffect, useRef, useState } from "react";
-// import useFollowPointer from "./use-follow-pointer";
 
 const MainComponent = () => {
   const [activeHoverEffect, setActiveHoverEffect] = useState("");
@@ -57,7 +56,7 @@ const MainComponent = () => {
         }
       };
     }
-  }, []);
+  });
 
   return (
     <div
