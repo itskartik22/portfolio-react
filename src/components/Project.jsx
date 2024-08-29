@@ -5,7 +5,6 @@ import { IoMdClose } from "react-icons/io";
 import { FaGithub } from "react-icons/fa";
 
 const Project = ({ project }) => {
-  // console.log(project)
   const [activeHoverEffect, setActiveHoverEffect] = useState(false);
   const [popupActiveHoverEffect, setPopupActiveHoverEffect] = useState(null);
   const [projectPopUpWindow, setProjectPopUpWindow] = useState(false);

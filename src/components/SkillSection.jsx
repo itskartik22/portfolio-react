@@ -7,7 +7,6 @@ import {
   FaCss3Alt,
   FaBootstrap,
 } from "react-icons/fa";
-import { RiNextjsLine } from "react-icons/ri";
 import { DiJavascript1 } from "react-icons/di";
 import { TbBrandCpp } from "react-icons/tb";
 import {
